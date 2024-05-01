@@ -235,6 +235,10 @@ const StyledSubmitBtn = styled.button`
     &:hover {
       background-color: ${colors.darkBlue};
     }
+    &:disabled {
+      background-color: ${colors.lightGrey};
+      cursor: not-allowed;
+    }
   `};
 `;
 
