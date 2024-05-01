@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import Typography from '@/components/Typography';
 import Stack from './Stack';
@@ -18,6 +18,7 @@ interface StyledButtonProps {
   alignRight?: boolean;
 }
 
+// Initial products in basket
 const initialProducts: Product[] = [
   { id: 99991, name: 'Apple', price: 0.52, quantity: 2 },
   { id: 599999, name: 'Banana', price: 0.67, quantity: 3 },
@@ -135,6 +136,7 @@ const StyledTableFlexRow = styled.span`
     gap: ${space.small};
   `};
 `;
+
 const StyledTableBtnsWrap = styled.span`
   ${({ theme: { space } }) => css`
     display: flex;
