@@ -242,6 +242,17 @@ const StyledSubmitBtn = styled.button`
   `};
 `;
 
+const StyledEmptyBasket = styled.div`
+  ${({ theme: { space } }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: ${space.xSmall};
+  `};
+`;
+
 const Basket: FC = (...rest) => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
 
@@ -269,6 +280,11 @@ const Basket: FC = (...rest) => {
     },
     [products]
   );
+
+  // Create a function handleRefreshPage that will refresh the page
+  const handleRefreshPage = () => {
+    window.location.reload();
+  };
 
   // Calculate totals
   const subtotal = products.reduce(
@@ -311,81 +327,92 @@ const Basket: FC = (...rest) => {
           Review Your Order
         </StyledSummaryHeading>
         <StyledSummaryContainer>
-          <StyledTable>
-            <StyledTableThead>
-              <StyledTableTr>
-                <StyledTableTh scope="col">Product</StyledTableTh>
-                <StyledTableTh scope="col">Price</StyledTableTh>
-                <StyledTableTh scope="col">Quantity</StyledTableTh>
-                <StyledTableTh scope="col">Cost</StyledTableTh>
-              </StyledTableTr>
-            </StyledTableThead>
-            <StyledTableTbody>
-              {products.map((product) => (
-                <StyledTableTr key={product.id}>
-                  <StyledTableTd data-label="Product">
-                    {product.name}
-                  </StyledTableTd>
-                  <StyledTableTd data-label="Price">
-                    £{product.price.toFixed(2)}
-                  </StyledTableTd>
-                  <StyledTableTd data-label="Quantity">
-                    <StyledTableFlexRow>
-                      <Input
-                        id={product.id.toString()}
-                        type="number"
-                        label="Quantity"
-                        value={product.quantity}
-                        min={1}
-                        max={100}
-                        htmlFor={product.id.toString()}
-                        hideLabel
-                        compact
-                      />
-                      <StyledTableBtnsWrap>
-                        <StyledBtn
-                          isOrange
-                          onClick={() =>
-                            handleQuantityChange(
-                              product.id,
-                              Math.max(product.quantity - 1, 1)
-                            )
-                          }
-                        >
-                          -
-                        </StyledBtn>
-                        <StyledBtn
-                          isGreen
-                          onClick={() =>
-                            handleQuantityChange(
-                              product.id,
-                              Math.min(product.quantity + 1, 99)
-                            )
-                          }
-                        >
-                          +
-                        </StyledBtn>
-                      </StyledTableBtnsWrap>
-                    </StyledTableFlexRow>
-                  </StyledTableTd>
-                  <StyledTableTd data-label="Cost">
-                    <StyledTableFlexRow>
-                      <StyledCostWrap>
-                        £{(product.price * product.quantity).toFixed(2)}{' '}
-                      </StyledCostWrap>
-                      <StyledBtn
-                        isRed
-                        alignRight
-                        onClick={() => handleDelete(product.id)}
-                      >
-                        Delete
-                      </StyledBtn>
-                    </StyledTableFlexRow>
-                  </StyledTableTd>
+          {products.length > 0 ? (
+            <StyledTable>
+              <StyledTableThead>
+                <StyledTableTr>
+                  <StyledTableTh scope="col">Product</StyledTableTh>
+                  <StyledTableTh scope="col">Price</StyledTableTh>
+                  <StyledTableTh scope="col">Quantity</StyledTableTh>
+                  <StyledTableTh scope="col">Cost</StyledTableTh>
                 </StyledTableTr>
-              ))}
-            </StyledTableTbody>
-          </StyledTable>
+              </StyledTableThead>
+              <StyledTableTbody>
+                {products.map((product) => (
+                  <StyledTableTr key={product.id}>
+                    <StyledTableTd data-label="Product">
+                      {product.name}
+                    </StyledTableTd>
+                    <StyledTableTd data-label="Price">
+                      £{product.price.toFixed(2)}
+                    </StyledTableTd>
+                    <StyledTableTd data-label="Quantity">
+                      <StyledTableFlexRow>
+                        <Input
+                          id={product.id.toString()}
+                          type="number"
+                          label="Quantity"
+                          value={product.quantity}
+                          min={1}
+                          max={100}
+                          htmlFor={product.id.toString()}
+                          hideLabel
+                          compact
+                        />
+                        <StyledTableBtnsWrap>
+                          <StyledBtn
+                            isOrange
+                            onClick={() =>
+                              handleQuantityChange(
+                                product.id,
+                                Math.max(product.quantity - 1, 1)
+                              )
+                            }
+                          >
+                            -
+                          </StyledBtn>
+                          <StyledBtn
+                            isGreen
+                            onClick={() =>
+                              handleQuantityChange(
+                                product.id,
+                                Math.min(product.quantity + 1, 99)
+                              )
+                            }
+                          >
+                            +
+                          </StyledBtn>
+                        </StyledTableBtnsWrap>
+                      </StyledTableFlexRow>
+                    </StyledTableTd>
+                    <StyledTableTd data-label="Cost">
+                      <StyledTableFlexRow>
+                        <StyledCostWrap>
+                          £{(product.price * product.quantity).toFixed(2)}{' '}
+                        </StyledCostWrap>
+                        <StyledBtn
+                          isRed
+                          alignRight
+                          onClick={() => handleDelete(product.id)}
+                        >
+                          Delete
+                        </StyledBtn>
+                      </StyledTableFlexRow>
+                    </StyledTableTd>
+                  </StyledTableTr>
+                ))}
+              </StyledTableTbody>
+            </StyledTable>
+          ) : (
+            <StyledEmptyBasket>
+              <Typography component="h3" variant="bodyMediumBold">
+                Your basket is empty.
+              </Typography>
+              <StyledBtn isGreen onClick={() => handleRefreshPage()}>
+                Continue shopping
+              </StyledBtn>
+            </StyledEmptyBasket>
+          )}
         </StyledSummaryContainer>
       </StyledSummary>
       <StyledSubTotal gap="small">
