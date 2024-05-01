@@ -417,15 +417,15 @@ const Basket: FC = (...rest) => {
       </StyledSummary>
       <StyledSubTotal gap="small">
         <StyledTotalItem variant="bodyMedium">
-          Subtotal <span>£{subtotal.toFixed(2)}</span>
+          Subtotal <span>£{subtotal === 0 ? '0' : subtotal.toFixed(2)}</span>
         </StyledTotalItem>
         <StyledTotalItem variant="bodyMedium">
-          VAT @20% <span>£{vat.toFixed(2)}</span>
+          VAT @20% <span>£{vat === 0 ? '0' : vat.toFixed(2)}</span>
         </StyledTotalItem>
       </StyledSubTotal>
       <StyledTotal>
         <StyledTotalItem variant="bodyLarge">
-          Total <span>£{total.toFixed(2)}</span>
+          Total <span>£{total === 0 ? '0' : total.toFixed(2)}</span>
         </StyledTotalItem>
       </StyledTotal>
       <StyledSubmitContainer>
