@@ -1,9 +1,9 @@
-import React, { forwardRef, RefObject } from "react";
-import { BaseFormProps, StyledBase } from "../forms/Base";
-import { FormField, FormFieldProps } from "../forms/FormField";
+import React, { forwardRef, RefObject } from 'react';
+import { BaseFormProps, StyledBase } from '../forms/Base';
+import { FormField, FormFieldProps } from '../forms/FormField';
 
 export interface InputProps extends BaseFormProps, FormFieldProps {
-  type?: "text" | "email" | "password" | "tel" | "search" | "number";
+  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'number';
   maxLength?: number;
 }
 
@@ -14,8 +14,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       label,
       id,
-      type = "text",
+      type = 'text',
       invalid,
+      compact,
+      min,
+      max,
       valid,
       defaultValue,
       placeholder,
@@ -48,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     >
       <StyledBase
         as="input"
-        type={hidden ? "hidden" : type}
+        type={hidden ? 'hidden' : type}
         id={id}
         name={id}
         invalid={invalid}
@@ -61,10 +64,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         required={required}
         aria-describedby={hintText && `${id}-hint`}
         onChange={onChange}
+        compact={compact}
         maxLength={maxLength}
       />
     </FormField>
   )
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';

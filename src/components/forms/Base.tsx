@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { useBackgroundColor } from "../../hooks/useBackgroundColor";
+import styled, { css } from 'styled-components';
+import { useBackgroundColor } from '../../hooks/useBackgroundColor';
 
 export interface BaseFormProps {
   id: string;
@@ -11,6 +11,10 @@ export interface BaseFormProps {
   defaultValue?: string | number | readonly string[] | undefined;
   leftAligned?: boolean;
   centerAligned?: boolean;
+  min?: number;
+  max?: number;
+  readonly?: boolean;
+  compact?: boolean;
   onChange?: (...event: any[]) => void;
 }
 
@@ -20,6 +24,7 @@ interface StyledInputProps {
   active?: boolean;
   leftAligned?: boolean;
   centerAligned?: boolean;
+  compact?: boolean;
 }
 
 export const StyledBase = styled.input<StyledInputProps>`
@@ -31,25 +36,25 @@ export const StyledBase = styled.input<StyledInputProps>`
     as,
     leftAligned,
     centerAligned,
+    compact,
   }) =>
     css`
-      border: solid 1px ${colors.brandOne120};
-      ${useBackgroundColor("white")}
-      padding: ${space.xSmall} ${space.small};
+      border: solid 1px ${colors.grey};
+      ${useBackgroundColor('white')}
+      padding: ${space.xxxSmall} ${space.xxSmall};
       width: 100%;
       display: block;
       position: relative;
       transition: all 0.2s ease;
-      border-radius: 4px;
 
       &::placeholder {
         color: ${colors.neutral100};
       }
 
-      &:focus,
+      /* &:focus,
       &:hover {
-        box-shadow: 0 0 0 1px ${colors.brandOne120};
-      }
+        box-shadow: 0 0 0 1px ${colors.grey};
+      } */
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -58,9 +63,15 @@ export const StyledBase = styled.input<StyledInputProps>`
       }
 
       /* Works for Firefox */
-      &[type="number"] {
+      &[type='number'] {
         -moz-appearance: textfield;
       }
+
+      ${compact &&
+      css`
+        max-width: 40px;
+        text-align: center;
+      `}
 
       ${leftAligned &&
       css`
@@ -74,7 +85,7 @@ export const StyledBase = styled.input<StyledInputProps>`
 
       ${active &&
       css`
-        box-shadow: 0 0 0 1px ${colors.brandOne120};
+        box-shadow: 0 0 0 1px ${colors.grey};
       `}
 
       // Invalid state

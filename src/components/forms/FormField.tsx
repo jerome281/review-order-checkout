@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import styled, { css } from "styled-components";
-import { Stack } from "../Stack";
-import { Typography } from "../Typography";
+import React, { FC } from 'react';
+import styled, { css } from 'styled-components';
+import { Stack } from '../Stack';
+import { Typography } from '../Typography';
 
 export interface FormFieldProps {
   label: string;
-  fieldAs?: "div" | "fieldset";
+  fieldAs?: 'div' | 'fieldset';
   hideLabel?: boolean;
   htmlFor?: string;
   invalid?: boolean;
@@ -15,12 +15,12 @@ export interface FormFieldProps {
   hidden?: boolean;
   extraInformation?: string | React.ReactNode;
   small?: boolean;
-  value?: string;
+  value?: string | number;
   isOpen?: boolean;
 }
 
-type StyledFormFieldProps = Pick<FormFieldProps, "disabled">;
-type StyledFormFieldHeaderProps = Pick<FormFieldProps, "hideLabel">;
+type StyledFormFieldProps = Pick<FormFieldProps, 'disabled'>;
+type StyledFormFieldHeaderProps = Pick<FormFieldProps, 'hideLabel'>;
 
 const StyledFormField = styled.div<StyledFormFieldProps>`
   ${({ disabled, hidden }) => css`
@@ -51,7 +51,7 @@ const StyledFormFieldHeader = styled.div<StyledFormFieldHeaderProps>`
 
 export const FormField: FC<React.PropsWithChildren<FormFieldProps>> = ({
   label,
-  fieldAs = "div",
+  fieldAs = 'div',
   hideLabel,
   htmlFor,
   children,
@@ -70,17 +70,17 @@ export const FormField: FC<React.PropsWithChildren<FormFieldProps>> = ({
       <StyledFormFieldHeader hideLabel={hideLabel}>
         <Stack gap="xxSmall">
           <Typography
-            variant={small ? "bodySmallBold" : "bodyMediumBold"}
+            variant={small ? 'bodySmallBold' : 'bodyMediumBold'}
             htmlFor={htmlFor}
-            component={fieldAs === "fieldset" ? "legend" : "label"}
+            component={fieldAs === 'fieldset' ? 'legend' : 'label'}
             visuallyHidden={hideLabel}
           >
             {label}
           </Typography>
           {hintText && (
             <Typography
-              id={`${htmlFor || "field"}-hint`}
-              variant={small ? "bodySmall" : "bodyMedium"}
+              id={`${htmlFor || 'field'}-hint`}
+              variant={small ? 'bodySmall' : 'bodyMedium'}
             >
               {hintText}
             </Typography>
