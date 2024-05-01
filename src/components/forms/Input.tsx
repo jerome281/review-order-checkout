@@ -30,6 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       extraInformation,
       hidden,
       value,
+      dataCy,
       onChange,
       maxLength,
       ...rest
@@ -66,6 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         onChange={onChange}
         compact={compact}
         maxLength={maxLength}
+        data-cy={dataCy}
       />
     </FormField>
   )

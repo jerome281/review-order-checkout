@@ -15,6 +15,7 @@ export interface BaseFormProps {
   max?: number;
   readonly?: boolean;
   compact?: boolean;
+  dataCy?: string;
   onChange?: (...event: any[]) => void;
 }
 

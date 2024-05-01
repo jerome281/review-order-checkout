@@ -319,7 +319,7 @@ const Basket: FC = (...rest) => {
 
   return (
     <Stack gap="medium" {...rest}>
-      <StyledBasketHeading component="h2" variant="headingMedium">
+      <StyledBasketHeading component="h1" variant="headingMedium">
         Review Your Order & Complete Checkout
       </StyledBasketHeading>
       <StyledSummary>
@@ -340,7 +340,7 @@ const Basket: FC = (...rest) => {
               <StyledTableTbody>
                 {products.map((product) => (
                   <StyledTableTr key={product.id}>
-                    <StyledTableTd data-label="Product">
+                    <StyledTableTd data-label="Product" data-cy="product">
                       {product.name}
                     </StyledTableTd>
                     <StyledTableTd data-label="Price">
@@ -358,6 +358,7 @@ const Basket: FC = (...rest) => {
                           htmlFor={product.id.toString()}
                           hideLabel
                           compact
+                          dataCy="quantity-input"
                         />
                         <StyledTableBtnsWrap>
                           <StyledBtn
@@ -368,6 +369,7 @@ const Basket: FC = (...rest) => {
                                 Math.max(product.quantity - 1, 1)
                               )
                             }
+                            data-cy="remove-quantity-button"
                           >
                             -
                           </StyledBtn>
@@ -379,6 +381,7 @@ const Basket: FC = (...rest) => {
                                 Math.min(product.quantity + 1, 99)
                               )
                             }
+                            data-cy="add-quantity-button"
                           >
                             +
                           </StyledBtn>
@@ -394,6 +397,7 @@ const Basket: FC = (...rest) => {
                           isRed
                           alignRight
                           onClick={() => handleDelete(product.id)}
+                          data-cy="delete-product-button"
                         >
                           Delete
                         </StyledBtn>
@@ -432,6 +436,7 @@ const Basket: FC = (...rest) => {
         <StyledSubmitBtn
           disabled={products.length === 0}
           onClick={handleBuyNow}
+          data-cy="buy-now-button"
         >
           Buy Now
         </StyledSubmitBtn>
