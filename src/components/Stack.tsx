@@ -1,6 +1,6 @@
-import React, { Ref, forwardRef } from "react";
-import styled, { css } from "styled-components";
-import { ThemeSpaceKeys } from "../styles/tokens/space";
+import React, { Ref, forwardRef } from 'react';
+import styled, { css } from 'styled-components';
+import { ThemeSpaceKeys } from '../styles/tokens/space';
 
 export interface StackProps
   extends React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>> {
@@ -13,11 +13,11 @@ const StyledStack = styled.div<{ gap?: ThemeSpaceKeys; asGrid?: boolean }>`
   ${({ theme: { space }, gap, asGrid }) => css`
     ${asGrid
       ? css`
-          grid-row-gap: ${space[gap || "fluidMedium"]};
+          grid-row-gap: ${space[gap || 'fluidMedium']};
         `
       : css`
           > * + * {
-            margin-top: ${space[gap || "fluidMedium"]};
+            margin-top: ${space[gap || 'fluidMedium']};
           }
         `}
   `};
@@ -43,5 +43,5 @@ const StackComponent = (
 const Stack = forwardRef<HTMLDivElement, StackProps>(StackComponent);
 
 export { Stack, StyledStack };
-Stack.displayName = "Stack";
+Stack.displayName = 'Stack';
 export default Stack;
