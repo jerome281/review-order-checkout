@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { colors } from './tokens';
-import typography from './tokens/typography';
+import { colors, typography } from './tokens';
 
 export const GlobalStyle = createGlobalStyle`
         *,
@@ -13,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
         }
   
         *:focus-visible {
-          outline: 4px solid ${colors.systemFocus};
+          outline: 1px solid ${colors.systemFocus};
         }
   
         html {
@@ -91,7 +90,7 @@ export const GlobalStyle = createGlobalStyle`
         // Body
   
         body {
-          font-size: ${typography.bodyMedium};
+          ${typography.bodyMedium};
           min-height: 100vh;
           width: 100%;
           min-width: 320px;
