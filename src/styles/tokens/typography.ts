@@ -56,7 +56,6 @@ const typography = {
   },
   headingSmall: {
     //fontFamily: fontFamily.headingBold,
-    fontWeight: fontWeight.bold,
     fontSize: 'clamp(1.25rem, 1.1359rem + 0.4854vw, 1.5rem)', // 20px => 24px
     lineHeight: 'clamp(1.75rem, 1.6359rem + 0.4854vw, 2rem)', // 28px => 32px
     ...displayBase,
