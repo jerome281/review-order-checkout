@@ -161,7 +161,9 @@ const StyledBtn = styled.button<StyledButtonProps>`
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.8);
+    }
     ${alignRight &&
     css`
       margin-left: auto;
@@ -209,20 +211,20 @@ const StyledTotalItem = styled(Typography)`
 `;
 
 const StyledTotal = styled.div`
-  ${({ theme: { space, colors } }) => css`
-    border-bottom: 1px solid ${colors.grey};
-    padding: 0 0 ${space.medium} 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  `};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StyledSubmitContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
+  ${({ theme: { colors, space } }) => css`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding-top: ${space.medium};
+    border-top: 1px solid ${colors.grey};
+  `};
 `;
 
 const StyledSubmitBtn = styled.button`
@@ -234,6 +236,9 @@ const StyledSubmitBtn = styled.button`
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.8);
+    }
     &:hover {
       background-color: ${colors.darkBlue};
     }
@@ -325,7 +330,7 @@ const Basket: FC = (...rest) => {
         Review Your Order & Complete Checkout
       </StyledBasketHeading>
       <StyledSummary>
-        <StyledSummaryHeading component="h3" variant="bodyMedium">
+        <StyledSummaryHeading component="h2" variant="bodyMedium">
           Review Your Order
         </StyledSummaryHeading>
         <StyledSummaryContainer>
@@ -411,7 +416,7 @@ const Basket: FC = (...rest) => {
             </StyledTable>
           ) : (
             <StyledEmptyBasket>
-              <Typography component="h3" variant="bodyMediumBold">
+              <Typography component="h2" variant="bodyMediumBold">
                 Your basket is empty.
               </Typography>
               <StyledBtn isGreen onClick={() => handleRefreshPage()}>
@@ -421,19 +426,24 @@ const Basket: FC = (...rest) => {
           )}
         </StyledSummaryContainer>
       </StyledSummary>
-      <StyledSubTotal gap="small">
-        <StyledTotalItem variant="bodyMedium">
-          Subtotal <span>£{subtotal === 0 ? '0' : subtotal.toFixed(2)}</span>
-        </StyledTotalItem>
-        <StyledTotalItem variant="bodyMedium">
-          VAT @20% <span>£{vat === 0 ? '0' : vat.toFixed(2)}</span>
-        </StyledTotalItem>
-      </StyledSubTotal>
-      <StyledTotal>
-        <StyledTotalItem variant="bodyLarge">
-          Total <span>£{total === 0 ? '0' : total.toFixed(2)}</span>
-        </StyledTotalItem>
-      </StyledTotal>
+      {products.length > 0 && (
+        <>
+          <StyledSubTotal gap="small">
+            <StyledTotalItem component="h3" variant="bodyMedium">
+              Subtotal{' '}
+              <span>£{subtotal === 0 ? '0' : subtotal.toFixed(2)}</span>
+            </StyledTotalItem>
+            <StyledTotalItem component="h3" variant="bodyMedium">
+              VAT @20% <span>£{vat === 0 ? '0' : vat.toFixed(2)}</span>
+            </StyledTotalItem>
+          </StyledSubTotal>
+          <StyledTotal>
+            <StyledTotalItem component="h3" variant="bodyLarge">
+              Total <span>£{total === 0 ? '0' : total.toFixed(2)}</span>
+            </StyledTotalItem>
+          </StyledTotal>
+        </>
+      )}
       <StyledSubmitContainer>
         <StyledSubmitBtn
           disabled={products.length === 0}
