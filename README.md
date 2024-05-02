@@ -26,10 +26,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 1. First page load preload the cart with 2 items
 2. User can change the quantity of the item in the cart
 3. User can remove the item from the cart
-4. if the cart is empty, show a message that the cart is empty and disabe the `Buy now` button and if user click the `Continue Shopping` button the page will refresh back to the start
+4. if the cart is empty, show a message that the cart is empty and disable the `Buy now` button and if user click the `Continue Shopping` button the page will refresh back to the start
 5. If products and user click the `Buy now` button, a simulate a Ajax call to show the data pushed on the json format
 
-## Basket component logic
+## Basket component
 
 1. Interface `Product` is used to define the product object
 2. Interface `StyledButtonProps` is used to define the button styles props
@@ -39,9 +39,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 6. Function `handleBuyNow` is used to handle the buy now button click to simulate the ajax call
 7. Function `handleRefreshPage` is used to handle the continue shopping button click
 8. Logic to calculate `subtotal` and `total` of the products in the basket
+9. I've used `styled-components` to style the components
+10. I've used `cypress` to write the e2e test
+11. I've used `typescript` to define the types
+12. I've use clamp is used to create a fluid typography scale
+13. I've checked the accessibility of the app using the `Wave` tool, I've noticed some contrast color issues but I've ignored it to match the design. I've also checked the tab navigation.
 
 ## Cypress Test
 
 1. Run `npm run cypress:open` to open the cypress test runner
 2. Click on the test file to run the test
-3. Unit test file is located at `cypress/e2e/app.cy.ts`
+3. Test file is located at `cypress/e2e/app.cy.ts`
