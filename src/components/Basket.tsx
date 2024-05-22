@@ -78,12 +78,7 @@ const StyledTableThead = styled.thead`
   ${({ theme: { colors, maxMedia } }) => css`
     background-color: ${colors.lightGrey};
     @media (max-width: ${maxMedia.medium}) {
-      //border: none;
-      // clip: rect(0 0 0 0);
-      //height: 1px;
-      //margin: -1px;
       overflow: hidden;
-      //padding: 0;
       position: absolute;
       width: 1px;
     }
@@ -298,8 +293,8 @@ const Basket: FC = (...rest) => {
     (acc, product) => acc + Number(product.price) * Number(product.quantity),
     0
   );
-  const vat = subtotal * 0.2;
-  const total = subtotal + vat;
+  const vat = subtotal * 0.2; // 20% VAT
+  const total = subtotal + vat; // Total including VAT
 
   // Click handler for Buy Now button
   const handleBuyNow = () => {
